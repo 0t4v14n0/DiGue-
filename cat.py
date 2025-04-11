@@ -38,7 +38,7 @@ class PaginaInicial(tk.Frame):
         self.labelfundo = tk.Label(self, image=self.img_menup)
         self.labelfundo.pack()
 
-        submit_button = tk.Button(self, text="Capturar Pergunta", command=lambda: controller.mostrar_pagina(ScreenCapture),font=("Arial", 30))
+        submit_button = tk.Button(self, text="Capturar Pergunta", command=ScreenCapture,font=("Arial", 30))
         submit_button.place(x=70, y=350)
 
 class ScreenCapture:
