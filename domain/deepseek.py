@@ -1,29 +1,27 @@
-import requests
+# import requests
 import os
+from openai import OpenAI
 
-key = os.getenv("key-api-deepseek")
+class OpenRouter:
+    
+    def inicio(text):
+        
+        key = os.getenv("key-api-deepseek")
 
-# Substitua pela sua chave de API do OpenRouter
-API_KEY = key
-API_URL = 'https://openrouter.ai/api/v1'
+        client = OpenAI(
+            base_url="https://openrouter.ai/api/v1",
+            api_key=key,
+        )
 
-# Defina os cabeçalhos para a requisição da API
-headers = {
-    'Authorization': f'Bearer {API_KEY}',
-    'Content-Type': 'application/json'
-}
+        completion = client.chat.completions.create(
+            model="deepseek/deepseek-chat",
+            messages=[
+                {"role": "user", "content": text}
+            ],
+            extra_headers={
+                "HTTP-Referer": "https://seusite.com",
+                "X-Title": "Meu App",
+            }
+        )
 
-# Defina o payload da requisição (dados)
-data = {
-    "model": "deepseek/deepseek-chat:free",
-    "messages": [{"role": "user", "content": "Qual é o significado da vida?"}]
-}
-
-# Envie a requisição POST para a API DeepSeek
-response = requests.post(API_URL, json=data, headers=headers)
-
-# Verifique se a requisição foi bem-sucedida
-if response.status_code == 200:
-    print("Resposta da API:", response.json())
-else:
-    print("Falha ao buscar dados da API. Código de Status:", response.status_code)
+        print(completion.choices[0].message.content)

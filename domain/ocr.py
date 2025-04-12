@@ -2,8 +2,10 @@ import pytesseract as pt
 import cv2
 from pathlib import Path
 from PIL import Image
+from domain.deepseek import OpenRouter
 
 class OCR:
+    
     def inicio():
 
         pt.pytesseract.tesseract_cmd = "C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe"
@@ -16,3 +18,5 @@ class OCR:
         text = pt.pytesseract.image_to_string(Image.open("temp.png"))
 
         print(text)
+
+        OpenRouter.inicio(text)
