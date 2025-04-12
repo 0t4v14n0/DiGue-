@@ -35,5 +35,28 @@ class PaginaInicial(tk.Frame):
         self.labelfundo = tk.Label(self, image=self.img_menup)
         self.labelfundo.pack()
 
-        submit_button = tk.Button(self, text="Capturar Pergunta", command=ScreenCapture,font=("Arial", 30))
-        submit_button.place(x=70, y=350)
+        self.texto_resposta = tk.Text(self, height=5, width=10, font=("Arial", 12))
+        self.texto_resposta.place(x=200, y=300)
+
+        submit_button = tk.Button(
+            self,
+            text="Capturar Pergunta",
+            command=lambda: [
+                self.texto_resposta.delete("1.0", tk.END),  # Limpa o texto
+                self.controller.iconify(),  # Minimiza a janela principal
+                self.iniciar_captura()     # Inicia o processo de captura
+            ],
+            font=("Arial", 30)
+        )
+        submit_button.place(x=70, y=400)
+    
+    def iniciar_captura(self):
+        # Passa self (esta instncia) para ScreenCapture
+        ScreenCapture(gui_reference=self)
+
+    def mostrar_resposta(self, texto):
+        self.texto_resposta.delete("1.0", tk.END)  # Limpa o conteudo da caixa de texto
+        self.texto_resposta.insert(tk.END, texto)
+
+        self.controller.deiconify()  # Remove o estado minimizado
+        self.controller.lift()       # Traz para frente de outras janelas

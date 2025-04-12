@@ -4,7 +4,8 @@ from PIL import ImageGrab
 from domain.ocr import *
 
 class ScreenCapture:
-    def __init__(self):
+    def __init__(self, gui_reference=None):
+        self.gui = gui_reference
         self.start_x = None
         self.start_y = None
         self.rect = None
@@ -35,5 +36,5 @@ class ScreenCapture:
         image = ImageGrab.grab(bbox=(x1, y1, x2, y2))
         image.save("captura.png")
         print("Imagem capturada e salva como captura.png")
-        OCR.inicio()
+        OCR.inicio(gui_reference=self.gui)
     

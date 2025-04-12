@@ -6,7 +6,7 @@ from domain.deepseek import OpenRouter
 
 class OCR:
     
-    def inicio():
+    def inicio(gui_reference=None):
 
         pt.pytesseract.tesseract_cmd = "C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe"
 
@@ -19,4 +19,4 @@ class OCR:
 
         print(text)
 
-        OpenRouter.inicio(text)
+        OpenRouter.inicio(text, gui_reference=gui_reference)
