@@ -8,6 +8,7 @@ class MinhaApp(tk.Tk):
         
         self.title("Pergunta DI GUE ?")
         self.geometry("500x500")
+        self.iconbitmap("imagens/ico.ico")
         
         self.container = tk.Frame(self)
         self.container.pack(side="top", fill="both", expand=True)
