@@ -5,6 +5,29 @@
 @echo ---------------------------------------------------
 @echo.
 
+:: Pergunta sobre a API KEY
+@echo.
+@echo ---------------------------------------------------
+@echo  Voce tem uma chave da API Openrouter DeepSeek?
+@echo  (s/n)
+@echo ---------------------------------------------------
+set /p temChave="Resposta: "
+
+if /i "%temChave%"=="n" (
+    start https://openrouter.ai/deepseek/deepseek-r1-zero:free/api
+    echo Por favor gere a chave e reinicie o instalador apos isso.
+    pause
+    exit /b
+)
+
+if /i "%temChave%"=="s" (
+    echo Cole sua chave da API abaixo:
+    set /p apiKey="Chave: "
+    setx key-api-deepseek "%apiKey%"
+    echo ---------------------------------------------------
+    echo Variavel de ambiente 'key-api-deepseek' criada!
+)
+
 :: Instala OCR
 @echo ---------------------------------------------------
 @echo  Instalando o OCR TESSERACT...
