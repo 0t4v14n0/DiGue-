@@ -20,13 +20,16 @@ if /i "%temChave%"=="n" (
     exit /b
 )
 
-if /i "%temChave%"=="s" (
-    echo Cole sua chave da API abaixo:
-    set /p apiKey="Chave: "
+@echo off
+set /p apiKey="Cole sua chave da API: "
+if not "%apiKey%"=="" (
     setx key-api-deepseek "%apiKey%"
     echo ---------------------------------------------------
     echo Variavel de ambiente 'key-api-deepseek' criada!
+) else (
+    echo Nenhuma chave foi inserida. Abortando...
 )
+pause
 
 :: Instala OCR
 @echo ---------------------------------------------------
