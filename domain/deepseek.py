@@ -29,20 +29,18 @@ class OpenRouter:
 
             completion = client.chat.completions.create(
                 model="deepseek/deepseek-chat",
-                messages=[
-                    {"role": "user", "content": prompt}
-                ],
+                messages=[{"role": "user", "content": prompt}],
                 extra_headers={
                     "HTTP-Referer": "https://0t4v14n0.github.io/portfolio/",
                     "X-Title": "Di gue ?",
                 }
             )
 
-            print(completion.choices[0].message.content)
+            response = completion.choices[0].message.content
+            print(response)
 
             if gui_reference:
-                # Atualiza a GUI na thread principal
-                gui_reference.after(0, lambda: gui_reference.mostrar_resposta(completion.choices[0].message.content))
+                gui_reference.after(0, lambda: gui_reference.mostrar_resposta_api(response))
 
         except:
 
